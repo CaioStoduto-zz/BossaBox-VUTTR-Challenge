@@ -1,0 +1,13 @@
+language: node_js
+cache: yarn
+node_js:
+  - 12
+
+script:
+  - commitlint-travis
+
+jobs:
+  include:
+    - stage: Test
+      node_js: node
+      script: jest

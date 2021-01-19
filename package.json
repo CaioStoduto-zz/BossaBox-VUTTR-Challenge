@@ -1,0 +1,47 @@
+{
+  "name": "bossabox-vuttr-challenge",
+  "version": "1.0.0",
+  "description": "Your task is to build an API and database for the VUTTR (Very Useful Tools to Remember) application. The application is a simple repository for managing tools with their names, links, descriptions and tags.",
+  "main": "src/index.js",
+  "repository": "https://github.com/CaioStoduto/BossaBox-VUTTR-Challenge",
+  "author": "Caio Stoduto",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "commit": "git-cz",
+    "start": "node .",
+    "dev": "nodemon src/index.js --dev",
+    "test": "jest"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.4.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "commitizen": "^4.2.3",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "^7.18.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "husky": "^4.3.8",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
