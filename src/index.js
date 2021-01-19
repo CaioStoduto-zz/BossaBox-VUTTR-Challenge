@@ -1,5 +1,14 @@
+/** Environment Variables
+ * COOKIES_SECRET
+ * DB_AUTH (mongodb+srv://{USER}:{DB_PASSWORD}@{DB_HOST})
+ * DB_NAME
+ */
+
 //* Importing and applying dotenv (a module that loads environment variables from a .env file into process.env)
 require('dotenv').config()
+
+//* Init the database globally
+require('./utils/database')()
 
 //* Importing express() that is exported by ./server.js
 // Building an app separately helps on tests
