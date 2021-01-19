@@ -8,7 +8,7 @@
 require('dotenv').config()
 
 //* Init the database globally
-require('./utils/database')()
+require('./util/database')()
 
 //* Importing express() that is exported by ./server.js
 // Building an app separately helps on tests
