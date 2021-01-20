@@ -128,7 +128,7 @@ module.exports = {
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
   setupFiles: [
-    './src/__test_modules__/setupFiles/dotenv'
+    './src/__test_modules__/setupFiles/global'
   ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
