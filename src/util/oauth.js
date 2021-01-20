@@ -21,7 +21,7 @@ module.exports = {
       return url.toString()
     },
     //* Function to get the identifier of the OAuth service by the response of the OAuth
-    getLoginIdentifier: async (query) => {
+    getIdentifier: async (query) => {
       //* If the query (the request parameters) has the parameter code
       if (query.code) {
         //* Requests to the OAuth Service the access_token with the code provided by the OAuth redirect

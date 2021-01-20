@@ -7,7 +7,7 @@ Object.keys(OAuth).forEach((key) => {
   //* Sets the router to accept [GET] requests of each OAuth Service
   router.get(`/${key}`, async (req, res) => {
     //* Tries to get the identifier with the redirect parameters
-    const loginID = await OAuth[key].getLoginIdentifier(req.query)
+    const loginID = await OAuth[key].getIdentifier(req.query)
 
     //* If it successfully gets the ID
     if (loginID.err === undefined && loginID.identifier) {
