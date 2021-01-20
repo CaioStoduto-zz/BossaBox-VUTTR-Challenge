@@ -2,6 +2,9 @@
  * COOKIES_SECRET
  * DB_AUTH (mongodb+srv://{USER}:{DB_PASSWORD}@{DB_HOST})
  * DB_NAME
+ * GITHUB_PUBLIC
+ * GITHUB_SECRET
+ * JWT_SECRET
  */
 
 //* Importing and applying dotenv (a module that loads environment variables from a .env file into process.env)

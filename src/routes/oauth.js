@@ -1,5 +1,6 @@
 //* Importing dependencies
 const router = require('express').Router()
+const { auth } = require('../util/misc')
 const OAuth = require('../util/oauth')
 
 //* Gets all the OAuth methods avaliable
@@ -9,13 +10,15 @@ Object.keys(OAuth).forEach((key) => {
     //* Tries to get the identifier with the redirect parameters
     const loginID = await OAuth[key].getIdentifier(req.query)
 
-    //* If it successfully gets the ID
-    if (loginID.err === undefined && loginID.identifier) {
-      return res.status(200).send(`Your ID on ${key} is ${loginID.identifier}`).end()
-    } else {
-      //* Shows the error that occured
+    //* Shows the error that occured
+    if (loginID.err !== undefined || !loginID.identifier) {
       return res.status(loginID.err.code).send(`${loginID.err.message}\n\nSomething went wrong, try again later, http://${req.get('host')}`).end()
     }
+
+    //* Sets the OAuth Service used
+    loginID.service = key
+    //* Authorizate the user
+    auth(req, res, loginID)
   })
 })
 
