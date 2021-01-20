@@ -41,6 +41,7 @@ app.use('*', async (req, res, next) => {
 
 //* Setting up routes
 app.use('/', require('./routes/index'))
+app.use('/logout', require('./routes/logout'))
 app.use('/oauth', require('./routes/oauth'))
 
 //* Exporting the app to able others modules to use it
