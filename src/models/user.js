@@ -3,12 +3,9 @@ const mongoose = require('mongoose')
 
 //* Creates an Database Schema with the User model parameters
 const UserSchema = new mongoose.Schema({
-  loginIdentifier: {
-    type: String,
-    required: true
-  },
-  loginMethods: {
-    type: [String],
+  loginIdentifiers: {
+    type: Map,
+    of: String,
     required: true
   },
   authorized: {
