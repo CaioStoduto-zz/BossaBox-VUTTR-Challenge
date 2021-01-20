@@ -15,6 +15,7 @@ app.use(express.json())
 
 //* Setting up routes
 app.use('/', require('./routes/index'))
+app.use('/oauth', require('./routes/oauth'))
 
 //* Exporting the app to able others modules to use it
 module.exports = app
