@@ -1,6 +1,8 @@
 //* Importing dependencies
 const cookieParser = require('cookie-parser')
 const express = require('express')
+const jwt = require('jsonwebtoken')
+const User = require('./models/user')
 
 //* Building app
 const app = express()
@@ -12,6 +14,30 @@ app.use(require('helmet')())
 app.use(cookieParser(process.env.COOKIES_SECRET)) // COOKIES_SECRET is the private key to signedCookies set in .env
 // Implementing an handler to take care of requests with the body as json (as requested by the challenge in Requirements#3)
 app.use(express.json())
+
+//* Middleware that parses the user found in the database
+app.use('*', async (req, res, next) => {
+  //* Gets the signed cookie 🍪 that contains the user authentication
+  const authToken = req.signedCookies['auth-token']
+
+  //* If the cookie 🍪 auth-token is different of null or undefined
+  if (authToken) {
+    //* Using try because jwt.verify() throws an error when the JWT is invalid
+    try {
+      //* Decripts the JWT
+      const verified = jwt.verify(authToken, process.env.JWT_SECRET, { maxAge: '1d' })
+
+      //* Using try because the mongoose throws an error when the ID syntax is invalid or when the database connection fails
+      try {
+        //* Finds the User by their ID, otherwise returns undefined
+        req.user = await User.findById(verified._id) || undefined
+      } catch (e) { /* Invalid UserID or database connection failed */ }
+    } catch (e) { /* Invalid JWT */ }
+  }
+
+  //* Takes it to the next middleware
+  next()
+})
 
 //* Setting up routes
 app.use('/', require('./routes/index'))
