@@ -14,5 +14,5 @@ Object.keys(OAuth).forEach((key) => {
   })
 })
 
-//* Exporta o request handler
+//* Exporting the router to able others modules to use it
 module.exports = router
