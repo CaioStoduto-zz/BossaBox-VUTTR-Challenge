@@ -48,11 +48,11 @@ async function dropAllCollections () {
 //* Exporting the functions to able others modules to use it
 module.exports = {
   //* Function that sets up the database
-  setupDB (DB_NAME, clearAfterEach = true) {
+  setupDB (clearAfterEach = true) {
     //* Before all, connects to Mongoose
     beforeAll(async () => {
       //* URL used to connect to MongoDB
-      const connectionURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${DB_NAME}?retryWrites=true`
+      const connectionURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}.${global.randomString(5)}?retryWrites=true`
       //* Options used with MongoDB
       const options = {
         useNewUrlParser: true,
