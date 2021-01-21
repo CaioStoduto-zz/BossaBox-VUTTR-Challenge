@@ -4,7 +4,12 @@ const User = require('../models/user')
 
 //* Those functions are here and not where they are used so it can be tested
 
-//* Function that authorizates the user using cookies
+/**
+ * Authorizates the user using cookies
+ * @param {Express.Request} req
+ * @param {Express.Response} res
+ * @param {String} loginID the login identification obtained when the user logged in
+ */
 async function auth (req, res, loginID) {
   //* Function that will find or create a new user depending if the identifier has been founded
   const userResult = await findOrCreateUser(loginID)
@@ -12,7 +17,9 @@ async function auth (req, res, loginID) {
   //* Sets the status of the result as the status output of the previous function
   res.status(userResult.status)
 
-  //* Function that creates the cookie and sign it to the user
+  /**
+   * Creates the cookie and sign it to the user
+   */
   function cookingCookie () {
     //* Creates a JWT containing the user authentication
     // _id = Database doc id (auto-generated)
@@ -51,7 +58,12 @@ async function auth (req, res, loginID) {
   }
 }
 
-//* Function that search for the user or creates one on the database
+/**
+ * Search for the user or creates one on the database
+ * @param {object} param0 the LoginID
+ * @param {String} param0.identifier string that identifies the user
+ * @param {String} param0.service service used to authenticate the user
+ */
 async function findOrCreateUser ({ identifier, service }) {
   //* Tries to find the user using the identifier
   let user = await User.findOne({ loginIdentifiers: { [service]: identifier } }).catch((e) => {

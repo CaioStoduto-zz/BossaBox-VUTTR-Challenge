@@ -7,7 +7,9 @@ const mongoose = require('mongoose')
 mongoose.set('useCreateIndex', true)
 mongoose.promise = global.Promise
 
-//* Function that remove all docs from all collections (cleans all collections)
+/**
+ * Removes all docs from all collections (cleans all collections) from the database
+ */
 async function removeAllCollections () {
   //* Gets all collections
   const collections = Object.keys(mongoose.connection.collections)
@@ -21,7 +23,9 @@ async function removeAllCollections () {
   })
 }
 
-//* Function that drops all collections
+/**
+ * Drops all collections from the database
+ */
 async function dropAllCollections () {
   //* Gets all collections
   const collections = Object.keys(mongoose.connection.collections)
@@ -45,35 +49,41 @@ async function dropAllCollections () {
   })
 }
 
-//* Exporting the functions to able others modules to use it
-module.exports = {
-  //* Function that sets up the database
-  setupDB (clearAfterEach = true) {
-    //* Before all, connects to Mongoose
-    beforeAll(async () => {
-      //* URL used to connect to MongoDB
-      const connectionURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}.${global.randomString(5)}?retryWrites=true`
-      //* Options used with MongoDB
-      const options = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        w: 'majority'
-      }
-      //* Tries to connect to MongoDB
-      await mongoose.connect(connectionURL, options)
-    })
-
-    if (clearAfterEach === true) {
-      // Cleans up database between each test
-      afterEach(async () => {
-        await removeAllCollections()
-      })
+/**
+ * Sets up the database
+ * @param {Boolean} clearAfterEach defines if it will clean the entire database after each individual test
+ */
+function setupDB (clearAfterEach = true) {
+  //* Before all, connects to Mongoose
+  beforeAll(async () => {
+    //* URL used to connect to MongoDB
+    const connectionURL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}.${global.randomString(5)}?retryWrites=true`
+    //* Options used with MongoDB
+    const options = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      w: 'majority'
     }
+    //* Tries to connect to MongoDB
+    await mongoose.connect(connectionURL, options)
+  })
 
-    //* Disconnect Mongoose
-    afterAll(async () => {
-      await dropAllCollections()
-      await mongoose.connection.close()
+  if (clearAfterEach === true) {
+    // Cleans up database between each test
+    afterEach(async () => {
+      await removeAllCollections()
     })
   }
+
+  //* Disconnect Mongoose
+  afterAll(async () => {
+    await dropAllCollections()
+    await mongoose.connection.close()
+  })
+}
+
+//* Exporting the functions to able others modules to use it
+module.exports = {
+  setupDB,
+  signCookie
 }

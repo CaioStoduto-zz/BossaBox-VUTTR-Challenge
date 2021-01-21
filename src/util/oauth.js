@@ -4,7 +4,11 @@ const axios = require('axios')
 //* Exporting all OAuth methods to able others modules to use it
 module.exports = {
   GitHub: {
-    //* Function to get the URL used to redirect the user to the OAuth
+    /**
+     * Creates the URL used to redirect the user to the OAuth
+     * @param {String} host the host used from the request
+     * @returns {String} the URL
+     */
     authURL: (host) => {
       //* Sets the URL to turn it easier to add parameters
       const url = new URL('https://github.com/login/oauth/authorize')
@@ -20,7 +24,11 @@ module.exports = {
       //* Returns the URL ready to be used
       return url.toString()
     },
-    //* Function to get the identifier of the OAuth service by the response of the OAuth
+    /**
+     * Gets the user identifier using the OAuth response
+     * @param {object} query
+     * @returns {object} containing the identifier or the error that occured
+     */
     getIdentifier: async (query) => {
       //* If the query (the request parameters) has the parameter code
       if (query.code) {

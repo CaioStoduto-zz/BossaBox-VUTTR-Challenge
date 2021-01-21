@@ -6,6 +6,10 @@ const connection = mongoose.connection
 connection.on('error', console.error.bind(console, 'connection error:'))
 
 //* Exporting the init database function to able others modules to use it
+/**
+ * Connects to the database
+ * @param {String} DB_NAME the name of the database that will be used
+ */
 module.exports = (DB_NAME = process.env.DB_NAME) => {
   //* URL used to connect to MongoDB
   const connectionURL = `${process.env.DB_AUTH}/${DB_NAME}?retryWrites=true`
@@ -17,7 +21,7 @@ module.exports = (DB_NAME = process.env.DB_NAME) => {
   }
 
   //* Tries to connect to MongoDB
-  return mongoose.connect(connectionURL, options, (err) => {
+  mongoose.connect(connectionURL, options, (err) => {
     //* If an error occurs
     if (err) {
       //* Logs the error
