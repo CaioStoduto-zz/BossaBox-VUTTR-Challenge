@@ -1,7 +1,6 @@
 //* Importing dependencies
 // Importing and applying .src/server to test .src/routes/logout
-const app = require('../../server')
-const request = require('supertest')(app) // https://zellwk.com/blog/endpoint-testing/
+const request = require('supertest')(global.app) // https://zellwk.com/blog/endpoint-testing/
 
 // 🍪 parser that interprets header
 const setCookie = require('set-cookie-parser')
