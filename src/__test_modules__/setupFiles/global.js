@@ -26,3 +26,8 @@ global.randomString = (length) => {
 //* Generates those secrets every test to prove that the tests are correct
 process.env.COOKIES_SECRET = global.randomString(64)
 process.env.JWT_SECRET = global.randomString(64)
+
+//* Function that generates a random number between 2 numbers (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_number_between_two_values)
+global.getRandomArbitrary = (min, max) => {
+  return Math.random() * (max - min) + min
+}

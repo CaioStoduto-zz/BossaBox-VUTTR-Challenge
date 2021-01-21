@@ -20,7 +20,7 @@ describe('force error getIdentifier()', () => {
   test('GitHub', async () => {
     //* 20 is the common syntax, however it doesn't matter, the result is the same with any length
     // So, to test as much as possible, trying with different lengths randomly generated too
-    const numOfChar = [20, getRandomArbitrary(1, 19), getRandomArbitrary(21, 40)]
+    const numOfChar = [20, global.getRandomArbitrary(1, 19), global.getRandomArbitrary(21, 40)]
 
     //* Try with each length
     numOfChar.forEach(async (num) => {
@@ -37,9 +37,3 @@ describe('force error getIdentifier()', () => {
     })
   })
 })
-
-//* Function that generates a random number between 2 numbers
-function getRandomArbitrary (min, max) {
-  //* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_number_between_two_values
-  return Math.random() * (max - min) + min
-}
