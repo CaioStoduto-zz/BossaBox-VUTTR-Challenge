@@ -31,7 +31,7 @@ app.use('*', async (req, res, next) => {
       try {
         //* Finds the User by their ID, otherwise returns undefined
         req.user = await User.findById(verified._id) || undefined
-      } catch (e) { /* Invalid UserID or database connection failed */ }
+      } catch (e) { /* Invalid UserID or database connection failed */ } // https://docs.mongodb.com/manual/reference/method/ObjectId/
     } catch (e) { /* Invalid JWT */ }
   }
 
