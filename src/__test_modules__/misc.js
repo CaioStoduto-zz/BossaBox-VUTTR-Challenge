@@ -82,6 +82,20 @@ function setupDB (clearAfterEach = true) {
   })
 }
 
+/**
+ * Sign a var as done in signedCookies
+ * @param {*} val any value that you wanna sign as a cookie
+ * @param {*} secret the secret key used to sign the val
+ * @returns {String} the val signed as a signedCookie
+ */
+function signCookie (val, secret) {
+  return `s%3A${val + '.' + require('crypto')
+    .createHmac('sha256', secret)
+    .update(val)
+    .digest('base64')
+    .replace(/=+$/, '')}`
+}
+
 //* Exporting the functions to able others modules to use it
 module.exports = {
   setupDB,
