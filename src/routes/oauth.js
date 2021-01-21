@@ -3,7 +3,7 @@ const router = require('express').Router()
 const { auth } = require('../util/misc')
 const OAuth = require('../util/oauth')
 
-//* Gets all the OAuth methods avaliable
+//* [GET] /OAuth/*
 Object.keys(OAuth).forEach((key) => {
   //* Sets the router to accept [GET] requests of each OAuth Service
   router.get(`/${key}`, async (req, res) => {
