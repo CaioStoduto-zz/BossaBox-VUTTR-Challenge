@@ -32,8 +32,7 @@ module.exports = {
     getIdentifier: async (query) => {
       //* If the query (the request parameters) has the parameter code
       if (query.code) {
-        //* Requests to the OAuth Service the access_token with the code provided by the OAuth redirect
-        const res = await axios.post('https://github.com/login/oauth/access_token', '', {
+        const axiosConfig = {
           //* Sets the parameters required to request the access_token
           params: {
             client_id: process.env.GITHUB_PUBLIC,
@@ -44,7 +43,10 @@ module.exports = {
           headers: {
             Accept: 'application/json'
           }
-        })
+        }
+
+        //* Requests to the OAuth Service the access_token with the code provided by the OAuth redirect
+        const res = await axios.post('https://github.com/login/oauth/access_token', '', axiosConfig)
 
         //* If occured any error, it will return the error
         if (res.data.error) {
