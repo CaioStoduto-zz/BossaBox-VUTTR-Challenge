@@ -5,7 +5,7 @@ const oauth = require('../oauth')
 describe('each OAuth authURL()', () => {
   //* Setting a common host to emulate a real environment
   const host = 'random.url'
-  test('GitHub', async () => {
+  test('GitHub', () => {
     //* Expected URL output
     const authUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_PUBLIC}&redirect_uri=${encodeURIComponent(`http://${host}/OAuth/GitHub`)}`
 
@@ -23,7 +23,7 @@ describe('force error getIdentifier()', () => {
     const numOfChar = [20, global.getRandomArbitrary(1, 19), global.getRandomArbitrary(21, 40)]
 
     //* Try with each length
-    numOfChar.forEach(async (num) => {
+    await numOfChar.forEach(async (num) => {
       //* Executing the function
       const res = await oauth.GitHub.getIdentifier({ code: `${global.randomString(num)}` })
 
@@ -35,5 +35,16 @@ describe('force error getIdentifier()', () => {
 
       expect(res.identifier).toBeUndefined()
     })
+
+    //* Executing the function
+    const res = await oauth.GitHub.getIdentifier({})
+
+    //* Testing result with expected responses
+    expect(res.err).toEqual({
+      code: 400,
+      message: 'Code parameter missing.'
+    })
+
+    expect(res.identifier).toBeUndefined()
   })
 })
