@@ -19,7 +19,7 @@ require('dotenv').config({
 global.randomString = (length) => {
   const charset = '@#$%{}[]()\\/\'"`~,;:.<>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   const n = charset.length
-  let string
+  let string = ''
 
   for (let i = 0; i < length; ++i) {
     string += charset.charAt(Math.floor(Math.random() * n))

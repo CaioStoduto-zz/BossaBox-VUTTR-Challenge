@@ -96,8 +96,35 @@ function signCookie (val, secret) {
     .replace(/=+$/, '')}`
 }
 
+/**
+ * Creates a new User on the database
+ * @param {String} service service used to authenticate the user
+ * @param {String} identifier the user identifier of the service
+ * @returns {MongooseDocument} the user doc
+ */
+async function randomUser (service = global.randomString(8), identifier = global.randomString(20)) {
+  return (await new global.models.User({
+    loginIdentifiers: {
+      [service]: identifier
+    }
+  }).save())
+}
+
+/**
+ * Object that creates a Mongoose doc id
+ * @returns {MongooseDocument._id}
+ */
+function mongoObjectId () {
+  const timestamp = (new Date().getTime() / 1000 | 0).toString(16)
+  return timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, () => {
+    return (Math.random() * 16 | 0).toString(16)
+  }).toLowerCase()
+}
+
 //* Exporting the functions to able others modules to use it
 module.exports = {
+  randomUser,
   setupDB,
-  signCookie
+  signCookie,
+  mongoObjectId
 }
