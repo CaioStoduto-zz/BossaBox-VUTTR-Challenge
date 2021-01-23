@@ -3,7 +3,7 @@ const router = require('express').Router()
 const OAuth = require('../util/oauth')
 
 //* Handles the requests [GET] at '/'
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   //* If the user isn't logged on
   if (!req.user) {
     //* Creates a object that will be send to the user containing all OAuth links avaliable
@@ -19,8 +19,10 @@ router.get('/', async (req, res) => {
     res.status(401).send(auths).end()
   } else {
     //* Just shows a message instructing how to logout
-    res.status(200).send(`Hi, you still logged on! If you want to logout, ${req.get('host')}/logout`).end()
+    res.status(200).send(`Hi, you still logged on! If you want to logout, http://${req.get('host')}/logout`).end()
   }
+
+  next()
 })
 
 //* Exporting the router to able others modules to use it

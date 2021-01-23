@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const { randomUser, signCookie, mongoObjectId } = global.misc
 const router = require('express').Router()
 
+//* Init Database
 global.misc.setupDB(false)
 
 router.get('/', (req, res) => {
@@ -78,6 +79,20 @@ describe('Authentication Middleware', () => {
     expect(result.body).toEqual({})
   })
 
+  test('🍪 && (invalid User._id syntax) && JWT', async () => {
+    //* Simulates the user request
+    const result = await request
+      .get('/test')
+      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: `${mongoObjectId()}${mongoObjectId()}` }, process.env.JWT_SECRET, { expiresIn: '2d' }), process.env.COOKIES_SECRET)}`])
+
+    //* Throws if an error occured
+    if (result.err) throw result.err
+
+    //* Tests the result to proof if it worked properly
+    expect(result.status).toBe(404)
+    expect(result.body).toEqual({})
+  })
+
   test('🍪 && User && !JWT', async () => {
     //* Simulates the user request
     const result = await request
@@ -90,5 +105,21 @@ describe('Authentication Middleware', () => {
     //* Tests the result to proof if it worked properly
     expect(result.status).toBe(404)
     expect(result.body).toEqual({})
+  })
+
+  test('🍪 && User && JWT', async () => {
+    const user = await randomUser()
+
+    //* Simulates the user request
+    const result = await request
+      .get('/test')
+      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '2d' }), process.env.COOKIES_SECRET)}`])
+
+    //* Throws if an error occured
+    if (result.err) throw result.err
+
+    //* Tests the result to proof if it worked properly
+    expect(result.status).toBe(200)
+    expect(result.body._id).toEqual(user._id.toString())
   })
 })
