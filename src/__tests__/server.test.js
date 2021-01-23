@@ -5,36 +5,7 @@ const jwt = require('jsonwebtoken')
 const { randomUser, signCookie, mongoObjectId } = global.misc
 const router = require('express').Router()
 
-beforeAll(async () => {
-  /**
-   * Generates a random string with 5 chars
-   * @returns {String} the random string
-   */
-  function randomSalt () {
-    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-    const n = charset.length
-    let string = ''
-
-    for (let i = 0; i < 5; ++i) {
-      string += charset.charAt(Math.floor(Math.random() * n))
-    }
-
-    return string
-  }
-
-  //* URL used to connect to MongoDB
-  const connectionURL = `${process.env.DB_AUTH}/${process.env.DB_NAME}-${randomSalt()}?retryWrites=true`
-
-  //* Options used with MongoDB
-  const options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    w: 'majority'
-  }
-
-  //* Tries to connect to MongoDB
-  await require('mongoose').connect(connectionURL, options)
-})
+global.misc.setupDB(false)
 
 router.get('/', (req, res) => {
   if (req.user) {

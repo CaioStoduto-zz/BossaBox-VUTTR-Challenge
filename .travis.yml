@@ -5,8 +5,3 @@ node_js:
 
 script:
   - commitlint-travis
-
-jobs:
-  include:
-    - stage: Test
-      script: jest

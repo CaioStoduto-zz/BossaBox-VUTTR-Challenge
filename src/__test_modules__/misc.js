@@ -15,23 +15,24 @@ async function removeAllCollections () {
   const collections = Object.keys(mongoose.connection.collections)
 
   //* ForEach collection
-  collections.forEach(async (collectionName) => {
+  for (const collectionName of collections) {
     //* Sets the collection
     const collection = mongoose.connection.collections[collectionName]
     //* Deletes all docs from collection
     await collection.deleteMany()
-  })
+  }
 }
 
 /**
  * Drops all collections from the database
  */
+
 async function dropAllCollections () {
   //* Gets all collections
   const collections = Object.keys(mongoose.connection.collections)
 
   //* ForEach collection
-  collections.forEach(async (collectionName) => {
+  for (const collectionName of collections) {
     //* Sets the collection
     const collection = mongoose.connection.collections[collectionName]
 
@@ -46,7 +47,7 @@ async function dropAllCollections () {
       if (error.message.includes('a background operation is currently running')) return
       console.log(error.message)
     }
-  })
+  }
 }
 
 /**
@@ -54,10 +55,26 @@ async function dropAllCollections () {
  * @param {Boolean} clearAfterEach defines if it will clean the entire database after each individual test
  */
 function setupDB (clearAfterEach = true) {
+  /**
+   * Generates a random string with 5 chars
+   * @returns {String} the random string
+   */
+  function randomSalt () {
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    const n = charset.length
+    let string = ''
+
+    for (let i = 0; i < 5; ++i) {
+      string += charset.charAt(Math.floor(Math.random() * n))
+    }
+
+    return string
+  }
+
   //* Before all, connects to Mongoose
   beforeAll(async () => {
     //* URL used to connect to MongoDB
-    const connectionURL = `${process.env.DB_AUTH}/${process.env.DB_NAME}.${global.randomString(5)}?retryWrites=true`
+    const connectionURL = `${process.env.DB_AUTH}/${process.env.DB_NAME}-${randomSalt()}?retryWrites=true`
     //* Options used with MongoDB
     const options = {
       useNewUrlParser: true,
@@ -96,13 +113,15 @@ function signCookie (val, secret) {
     .replace(/=+$/, '')}`
 }
 
+const oauths = Object.keys(require('../util/oauth'))
+
 /**
  * Creates a new User on the database
  * @param {String} service service used to authenticate the user
  * @param {String} identifier the user identifier of the service
  * @returns {MongooseDocument} the user doc
  */
-async function randomUser (service = global.randomString(8), identifier = global.randomString(20)) {
+async function randomUser (service = oauths[global.getRandomArbitrary(0, (oauths.length - 1))], identifier = global.randomString(20)) {
   return (await new global.models.User({
     loginIdentifiers: {
       [service]: identifier
