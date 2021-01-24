@@ -9,4 +9,4 @@ script:
 jobs:
   include:
     - stage: Test
-      script: jest
+      script: yarn jest
