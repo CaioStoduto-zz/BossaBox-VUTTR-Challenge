@@ -23,7 +23,7 @@ describe('[GET] /', () => {
 
     //* Tests the result to proof if it worked properly
     expect(result.status).toBe(200)
-    expect(result.text.replace(/http:\/\/127.0.0.1:(.{4,5})\//g, 'http://127.0.0.1:897/')).toBe(`Hi, you still logged on! If you want to logout, http://127.0.0.1:897/logout`)
+    expect(result.text.replace(/http:\/\/127.0.0.1:(.{4,5})\//g, 'http://127.0.0.1:897/')).toBe('Hi, you still logged on! If you want to logout, http://127.0.0.1:897/logout')
   })
 
   test('!User', async () => {
