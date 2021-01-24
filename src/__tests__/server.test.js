@@ -21,6 +21,41 @@ app.use('/test', router)
 
 const request = require('supertest')(app) // https://zellwk.com/blog/endpoint-testing/
 
+test('Rate Limit', async () => {
+  const appRateLimit = require('express')()
+  const requests = []
+
+  appRateLimit.use('*', (new (require('express-rate-limit'))({
+    windowMs: 6E5 /* 1 minute */,
+    max: 10,
+    message: 'Too many accounts created from this IP, please try again after 15 minutes.'
+  })))
+
+  appRateLimit.get('/', (req, res, next) => {
+    res.status(200).send('OK').end()
+    next()
+  })
+
+  const requestRateLimit = require('supertest')(appRateLimit)
+
+  for (let i = 0; i < 10; i++) {
+    requests[i] = requestRateLimit.get('/')
+  }
+
+  await requests.forEach(async (_request) => { await _request })
+
+  //* Simulates the user request
+  const result = await requestRateLimit
+    .get('/')
+
+  //* Throws if an error occured
+  if (result.err) throw result.err
+
+  //* Tests the result to proof if it worked properly
+  expect(result.status).toBe(429)
+  expect(result.text).toEqual('Too many accounts created from this IP, please try again after 15 minutes.')
+})
+
 //* Testing Authentication Middleware
 describe('Authentication Middleware', () => {
   test('🍪===undefined', async () => {
