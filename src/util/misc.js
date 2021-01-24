@@ -70,7 +70,7 @@ async function findOrCreateUser ({ identifier, service }) {
     //* If an error occurs, returns the error
     return {
       status: 500,
-      err_message: e
+      err_message: e.reason
     }
   })
 
