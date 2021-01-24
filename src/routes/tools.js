@@ -30,7 +30,8 @@ router.get('/', async (req, res) => {
     return res.status(200).contentType('application/json').json(await Tool.find(query)).end()
   } catch (e) {
     //* The database connection failed
-    return res.status(500).send(`Had an error: ${e.reason}`).end()
+    console.error(e)
+    res.status(500).send('Something went wrong, try again later').end()
   }
 })
 
@@ -73,7 +74,8 @@ router.delete('/:id', async (req, res) => {
       return res.status(400).send('The Tool ID is invalid.').end()
     } else {
       //* The database connection failed
-      return res.status(500).send(`Had an error: ${e.reason}`).end()
+      console.error(e)
+      res.status(500).send('Something went wrong, try again later.').end()
     }
   }
 })

@@ -53,7 +53,8 @@ async function auth (req, res, loginID) {
     //* If an error occured
     default: {
       //* Shows the error message to the user
-      res.send(`${loginID.err_message}\n\nSomething went wrong, try again later, http://${req.get('host')}`).end()
+      console.error(userResult)
+      res.status(500).send('Something went wrong, try again later.').end()
     }
   }
 }
