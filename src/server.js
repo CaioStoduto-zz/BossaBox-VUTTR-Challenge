@@ -15,6 +15,16 @@ app.use(cookieParser(process.env.COOKIES_SECRET)) // COOKIES_SECRET is the priva
 // Implementing an handler to take care of requests with the body as json (as requested by the challenge in Requirements#3)
 app.use(express.json())
 
+//* If it isn't a test
+if (process.env.NODE_ENV !== 'test') {
+  //* Set up a rate limit middleware
+  app.use('*', (new (require('express-rate-limit'))({
+    windowMs: 9e5 /* 15 minutes */,
+    max: 100,
+    message: 'Too many accounts created from this IP, please try again after 15 minutes.'
+  })))
+}
+
 //* Middleware that parses the user found in the database
 app.use('*', async (req, res, next) => {
   //* Gets the signed cookie 🍪 that contains the user authentication
