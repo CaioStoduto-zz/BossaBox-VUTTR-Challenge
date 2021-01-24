@@ -3,6 +3,16 @@ const router = require('express').Router()
 const { auth } = require('../util/misc')
 const OAuth = require('../util/oauth')
 
+//* If it isn't a test
+if (process.env.NODE_ENV !== 'test') {
+  //* Set up a rate limit
+  router.use(new (require('express-rate-limit'))({
+    windowMs: 6E4, // 1 minute
+    max: 5,
+    message: 'Too many accounts created from this IP, try again after 1 minute.'
+  }))
+}
+
 //* [GET] /OAuth/*
 Object.keys(OAuth).forEach((key) => {
   //* Sets the router to accept [GET] requests of each OAuth Service
