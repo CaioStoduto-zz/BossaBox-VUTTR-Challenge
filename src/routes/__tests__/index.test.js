@@ -1,13 +1,6 @@
 //* Importing dependencies
 // Importing and applying .src/server to test .src/routes/logout
 const app = global.app
-let host
-
-//* Middleware to store the host used
-app.use('*', (req, res, next) => {
-  host = req.get('host')
-  next()
-})
 
 const request = require('supertest')(app) // https://zellwk.com/blog/endpoint-testing/
 const { randomUser, signCookie } = global.misc
@@ -30,7 +23,7 @@ describe('[GET] /', () => {
 
     //* Tests the result to proof if it worked properly
     expect(result.status).toBe(200)
-    expect(result.text).toBe(`Hi, you still logged on! If you want to logout, http://${host}/logout`)
+    expect(result.text.replace(/http:\/\/127.0.0.1:(.{4,5})\//g, 'http://127.0.0.1:897/')).toBe(`Hi, you still logged on! If you want to logout, http://127.0.0.1:897/logout`)
   })
 
   test('!User', async () => {
@@ -45,7 +38,7 @@ describe('[GET] /', () => {
     //* ForEach with all OAuth methods
     Object.keys(OAuth).forEach((key) => {
       //* Adds the AuthURL to the AuthObject
-      auths[key] = OAuth[key].authURL(host)
+      auths[key] = OAuth[key].authURL('127.0.0.1:897/')
     })
 
     //* Throws if an error occured
@@ -53,6 +46,6 @@ describe('[GET] /', () => {
 
     //* Tests the result to proof if it worked properly
     expect(result.status).toBe(401)
-    expect(result.body).toEqual(auths)
+    expect(result.body.toString().replace(/http:\/\/127.0.0.1:(.{4,5})\//g, 'http://127.0.0.1:897/')).toEqual(auths.toString())
   })
 })
