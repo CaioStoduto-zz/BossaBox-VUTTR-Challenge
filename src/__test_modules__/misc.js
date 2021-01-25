@@ -81,6 +81,7 @@ function setupDB (clearAfterEach = true) {
       useUnifiedTopology: true,
       w: 'majority'
     }
+
     //* Tries to connect to MongoDB
     await mongoose.connect(connectionURL, options)
   })
@@ -95,6 +96,7 @@ function setupDB (clearAfterEach = true) {
   //* Disconnect Mongoose
   afterAll(async () => {
     await dropAllCollections()
+    await mongoose.connection.dropDatabase()
     await mongoose.connection.close()
   })
 }
@@ -116,16 +118,24 @@ function signCookie (val, secret) {
 const oauths = Object.keys(require('../util/oauth'))
 
 /**
- * Creates a new User on the database
- * @param {String} service service used to authenticate the user
- * @param {String} identifier the user identifier of the service
+ * reates a new User on the database
+ * @param {Object} param0 randomUser config
+ * @param {String} param0.authorized if the user is authorized
+ * @param {String} param0.identifier the user identifier of the service
+ * @param {String} param0.service service used to authenticate the user
  * @returns {MongooseDocument} the user doc
  */
-async function randomUser (service = oauths[global.getRandomArbitrary(0, (oauths.length - 1))], identifier = global.randomString(20)) {
+async function randomUser (config = {}) {
+  if (typeof config !== 'object') throw new Error('Parameter config needs to be an object.')
+  config.authorized = config.authorized || true
+  config.identifier = config.identifier || global.randomString(20)
+  config.service = config.service || oauths[global.getRandomArbitrary(0, (oauths.length - 1))]
+
   return (await new global.models.User({
     loginIdentifiers: {
-      [service]: identifier
-    }
+      [config.service]: config.identifier
+    },
+    authorized: config.authorized
   }).save())
 }
 
