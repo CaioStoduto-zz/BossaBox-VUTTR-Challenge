@@ -9,6 +9,7 @@ const defaultTools = require('../../extras/defaultTools.json')
 //* Init Database
 global.misc.setupDB(false)
 
+//* Adding default tools to use in tests
 beforeAll(async () => {
   defaultTools.forEach(async (defaultTool) => {
     await (new Tool({
@@ -20,12 +21,14 @@ beforeAll(async () => {
   })
 })
 
+//* Just delete the users
 afterEach(async () => {
   const collection = require('mongoose').connection.collections.users
   await collection.deleteMany()
 })
 
 describe('Authentication Middleware', () => {
+  //* Using a unused route to test authentication
   const _app = global.app
   _app.put('/tools', (req, res, next) => {
     return res.status(200).send('OK').end()
