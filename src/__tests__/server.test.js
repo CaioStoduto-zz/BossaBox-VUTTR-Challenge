@@ -1,5 +1,5 @@
 //* Importing dependencies
-// Importing and applying .src/server to test .src/routes/logout
+// Importing and applying .src/server to test .src/routes/server
 const app = global.app
 const jwt = require('jsonwebtoken')
 const { randomUser, signCookie, mongoObjectId } = global.misc

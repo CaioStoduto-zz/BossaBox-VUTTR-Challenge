@@ -1,5 +1,5 @@
 //* Importing dependencies
-// Importing and applying .src/server to test .src/routes/logout
+// Importing and applying .src/server to test .src/routes/index
 const app = global.app
 
 const request = require('supertest')(app) // https://zellwk.com/blog/endpoint-testing/
@@ -23,7 +23,7 @@ describe('[GET] /', () => {
 
     //* Tests the result to proof if it worked properly
     expect(result.status).toBe(200)
-    expect(result.text.replace(/http:\/\/127.0.0.1:(.{4,5})\//g, 'http://127.0.0.1:897/')).toBe('Hi, you still logged on! If you want to logout, http://127.0.0.1:897/logout')
+    expect(result.text.replace(/http:\/\/127.0.0.1:(.{4,5})/g, 'http://127.0.0.1:897')).toBe('Hi, you still logged on! If you want to logout, http://127.0.0.1:897/logout')
   })
 
   test('!User', async () => {
@@ -46,6 +46,6 @@ describe('[GET] /', () => {
 
     //* Tests the result to proof if it worked properly
     expect(result.status).toBe(401)
-    expect(result.body.toString().replace(/http:\/\/127.0.0.1:(.{4,5})\//g, 'http://127.0.0.1:897/')).toEqual(auths.toString())
+    expect(result.body.toString().replace(/http:\/\/127.0.0.1:(.{4,5})/g, 'http://127.0.0.1:897')).toEqual(auths.toString())
   })
 })
