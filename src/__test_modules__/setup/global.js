@@ -47,9 +47,11 @@ global.getRandomArbitrary = (min, max) => {
 // Adding some modules that will facilitate the importing proccess
 global.app = require('../../server')
 global.misc = require('../misc')
+global.joi = require('../../util/joi')
 
 global.models = {
-  User: require('../../models/user')
+  User: require('../../models/user'),
+  Tool: require('../../models/tool')
 }
 
 global.util = {

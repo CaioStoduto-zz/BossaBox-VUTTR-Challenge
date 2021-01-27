@@ -127,7 +127,7 @@ const oauths = Object.keys(require('../util/oauth'))
  */
 async function randomUser (config = {}) {
   if (typeof config !== 'object') throw new Error('Parameter config needs to be an object.')
-  config.authorized = config.authorized || true
+  if (typeof config.authorized !== 'boolean') config.authorized = true
   config.identifier = config.identifier || global.randomString(20)
   config.service = config.service || oauths[global.getRandomArbitrary(0, (oauths.length - 1))]
 
