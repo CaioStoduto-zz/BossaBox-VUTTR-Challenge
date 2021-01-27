@@ -1,7 +1,7 @@
 //* Importing dependencies
 const router = require('express').Router()
 const Tool = require('../models/tool')
-const joi = require('../utils/joi')
+const joi = require('../util/joi')
 
 //* Middleware that blocks unauthorized users
 router.use('*', (req, res, next) => {
