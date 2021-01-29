@@ -6,11 +6,10 @@ const User = require('../models/user')
 
 /**
  * Authorizates the user using cookies
- * @param {Express.Request} req
  * @param {Express.Response} res
  * @param {String} loginID the login identification obtained when the user logged in
  */
-async function auth (req, res, loginID) {
+async function auth (res, loginID) {
   //* Function that will find or create a new user depending if the identifier has been founded
   const userResult = await findOrCreateUser(loginID)
 

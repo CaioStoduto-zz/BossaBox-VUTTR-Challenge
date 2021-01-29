@@ -28,7 +28,7 @@ Object.keys(OAuth).forEach((key) => {
     //* Sets the OAuth Service used
     loginID.service = key
     //* Authorizate the user
-    auth(req, res, loginID)
+    auth(res, loginID)
   })
 })
 

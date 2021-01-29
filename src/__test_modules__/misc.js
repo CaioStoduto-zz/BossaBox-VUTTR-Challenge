@@ -58,7 +58,7 @@ function setupDB (clearAfterEach = true) {
   //* Before all, connects to Mongoose
   beforeAll(async () => {
     //* URL used to connect to MongoDB
-    const connectionURL = `${process.env.DB_AUTH}/${process.env.DB_NAME}-${global.randomString()}?retryWrites=true`
+    const connectionURL = `${process.env.DB_AUTH}/${process.env.DB_NAME}-${global.randomString(5)}?retryWrites=true`
     //* Options used with MongoDB
     const options = {
       useNewUrlParser: true,

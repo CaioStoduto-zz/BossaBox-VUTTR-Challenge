@@ -11,15 +11,16 @@ require('dotenv').config({
 })
 
 /**
-   * Generates a random string with 5 chars
+   * Generates a random string
+   * @param {Number} length the length of the random string
    * @returns {String} the random string
    */
-global.randomString = () => {
+global.randomString = (length) => {
   const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   const n = charset.length
   let string = ''
 
-  for (let i = 0; i < 5; ++i) {
+  for (let i = 0; i < length; ++i) {
     string += charset.charAt(Math.floor(Math.random() * n))
   }
 
@@ -28,7 +29,7 @@ global.randomString = () => {
 
 //* Setting a global vars that will help in tests (https://stackoverflow.com/questions/1497481/javascript-password-generator)
 /**
- * Generates a random string
+ * Generates a random string that contains uncommun chars
  * @param {Number} length the length of the random string
  * @returns {String} the random string
  */
