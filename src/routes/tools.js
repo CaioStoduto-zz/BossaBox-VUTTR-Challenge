@@ -49,15 +49,18 @@ router.post('/', async (req, res) => {
   if (error) return res.status(400).send(error.message).end()
 
   //* Creates a new tool (in the dabatase) based on the user input
-  const tool = await new Tool({
-    title: value.title,
-    link: value.link,
-    description: value.description,
-    tags: value.tags
-  }).save()
-
-  //* Returns the created tool to the user
-  return res.status(201).contentType('application/json').json(tool).end()
+  try {
+    const tool = await new Tool({
+      title: value.title,
+      link: value.link,
+      description: value.description,
+      tags: value.tags
+    }).save()
+    res.status(201).contentType('application/json').json(tool).end()
+  } catch (e) {
+    console.error(e)
+    res.status(500).send('Something went wrong, try again later').end()
+  }
 })
 
 //* Handles the requests [DELETE] at '/tools:id'
