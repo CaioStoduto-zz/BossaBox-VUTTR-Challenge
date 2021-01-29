@@ -139,5 +139,6 @@ module.exports = {
   randomUser,
   setupDB,
   signCookie,
-  mongoObjectId
+  mongoObjectId,
+  dropAllCollections
 }
