@@ -10,13 +10,29 @@ require('dotenv').config({
   path: require('path').resolve(__dirname, '../../../.env.test')
 })
 
+/**
+   * Generates a random string with 5 chars
+   * @returns {String} the random string
+   */
+global.randomString = () => {
+  const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+  const n = charset.length
+  let string = ''
+
+  for (let i = 0; i < 5; ++i) {
+    string += charset.charAt(Math.floor(Math.random() * n))
+  }
+
+  return string
+}
+
 //* Setting a global vars that will help in tests (https://stackoverflow.com/questions/1497481/javascript-password-generator)
 /**
  * Generates a random string
  * @param {Number} length the length of the random string
  * @returns {String} the random string
  */
-global.randomString = (length) => {
+global.randomSecret = (length) => {
   const charset = '@#$%{}[]()\\/\'"`~,;:.<>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   const n = charset.length
   let string = ''
@@ -29,8 +45,8 @@ global.randomString = (length) => {
 }
 
 //* Generates those secrets every test to prove that the tests are correct
-process.env.COOKIES_SECRET = global.randomString(64)
-process.env.JWT_SECRET = global.randomString(64)
+process.env.COOKIES_SECRET = global.randomSecret(64)
+process.env.JWT_SECRET = global.randomSecret(64)
 
 //* Setting up some global vars to help programming tests
 // (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_number_between_two_values)

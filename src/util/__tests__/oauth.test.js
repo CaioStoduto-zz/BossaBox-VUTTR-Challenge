@@ -25,7 +25,7 @@ describe('force error getIdentifier()', () => {
     //* Try with each length
     await numOfChar.forEach(async (num) => {
       //* Executing the function
-      const res = await oauth.GitHub.getIdentifier({ code: `${global.randomString(num)}` })
+      const res = await oauth.GitHub.getIdentifier({ code: `${global.randomSecret(num)}` })
 
       //* Testing result with expected responses
       expect(res.err).toEqual({

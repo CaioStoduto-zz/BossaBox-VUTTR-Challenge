@@ -16,7 +16,7 @@ describe('[GET] /', () => {
     //* Simulates the user request
     const result = await request
       .get('/')
-      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: (await randomUser())._id }, process.env.JWT_SECRET, { expiresIn: '2d' }), process.env.COOKIES_SECRET)}`])
+      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: (await randomUser())._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`])
 
     //* Throws if an error occured
     if (result.err) throw result.err

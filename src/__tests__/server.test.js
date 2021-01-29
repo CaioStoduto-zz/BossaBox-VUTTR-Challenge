@@ -26,7 +26,7 @@ test('Rate Limit', async () => {
   const requests = []
 
   appRateLimit.use('*', (new (require('express-rate-limit'))({
-    windowMs: 6E5 /* 1 minute */,
+    windowMs: 3E6 /* 5 minute */,
     max: 10,
     message: 'Too many accounts created from this IP, please try again after 15 minutes.'
   })))
@@ -76,7 +76,7 @@ describe('Authentication Middleware', () => {
     //* Simulates the user request
     const result = await request
       .get('/test')
-      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: (await randomUser())._id }, process.env.JWT_SECRET, { expiresIn: '2d' }), global.randomString(100))}`])
+      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: (await randomUser())._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), global.randomSecret(100))}`])
 
     //* Throws if an error occured
     if (result.err) throw result.err
@@ -90,7 +90,7 @@ describe('Authentication Middleware', () => {
     //* Simulates the user request
     const result = await request
       .get('/test')
-      .set('Cookie', [`auth-token=${jwt.sign({ _id: (await randomUser())._id }, process.env.JWT_SECRET, { expiresIn: '2d' })}`])
+      .set('Cookie', [`auth-token=${jwt.sign({ _id: (await randomUser())._id }, process.env.JWT_SECRET, { expiresIn: '1h' })}`])
 
     //* Throws if an error occured
     if (result.err) throw result.err
@@ -104,7 +104,7 @@ describe('Authentication Middleware', () => {
     //* Simulates the user request
     const result = await request
       .get('/test')
-      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: await mongoObjectId() }, process.env.JWT_SECRET, { expiresIn: '2d' }), process.env.COOKIES_SECRET)}`])
+      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: await mongoObjectId() }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`])
 
     //* Throws if an error occured
     if (result.err) throw result.err
@@ -118,7 +118,7 @@ describe('Authentication Middleware', () => {
     //* Simulates the user request
     const result = await request
       .get('/test')
-      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: `${mongoObjectId()}${mongoObjectId()}` }, process.env.JWT_SECRET, { expiresIn: '2d' }), process.env.COOKIES_SECRET)}`])
+      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: `${mongoObjectId()}${mongoObjectId()}` }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`])
 
     //* Throws if an error occured
     if (result.err) throw result.err
@@ -132,7 +132,7 @@ describe('Authentication Middleware', () => {
     //* Simulates the user request
     const result = await request
       .get('/test')
-      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: (await randomUser())._id }, global.randomString(100), { expiresIn: '2d' }), process.env.COOKIES_SECRET)}`])
+      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: (await randomUser())._id }, global.randomSecret(100), { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`])
 
     //* Throws if an error occured
     if (result.err) throw result.err
@@ -148,7 +148,7 @@ describe('Authentication Middleware', () => {
     //* Simulates the user request
     const result = await request
       .get('/test')
-      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '2d' }), process.env.COOKIES_SECRET)}`])
+      .set('Cookie', [`auth-token=${signCookie(jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`])
 
     //* Throws if an error occured
     if (result.err) throw result.err

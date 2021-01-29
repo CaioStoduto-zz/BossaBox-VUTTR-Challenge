@@ -55,26 +55,10 @@ async function dropAllCollections () {
  * @param {Boolean} clearAfterEach defines if it will clean the entire database after each individual test
  */
 function setupDB (clearAfterEach = true) {
-  /**
-   * Generates a random string with 5 chars
-   * @returns {String} the random string
-   */
-  function randomSalt () {
-    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-    const n = charset.length
-    let string = ''
-
-    for (let i = 0; i < 5; ++i) {
-      string += charset.charAt(Math.floor(Math.random() * n))
-    }
-
-    return string
-  }
-
   //* Before all, connects to Mongoose
   beforeAll(async () => {
     //* URL used to connect to MongoDB
-    const connectionURL = `${process.env.DB_AUTH}/${process.env.DB_NAME}-${randomSalt()}?retryWrites=true`
+    const connectionURL = `${process.env.DB_AUTH}/${process.env.DB_NAME}-${global.randomString()}?retryWrites=true`
     //* Options used with MongoDB
     const options = {
       useNewUrlParser: true,
@@ -128,7 +112,7 @@ const oauths = Object.keys(require('../util/oauth'))
 async function randomUser (config = {}) {
   if (typeof config !== 'object') throw new Error('Parameter config needs to be an object.')
   if (typeof config.authorized !== 'boolean') config.authorized = true
-  config.identifier = config.identifier || global.randomString(20)
+  config.identifier = config.identifier || global.randomSecret(20)
   config.service = config.service || oauths[global.getRandomArbitrary(0, (oauths.length - 1))]
 
   return (await new global.models.User({

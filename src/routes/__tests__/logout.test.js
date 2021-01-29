@@ -11,7 +11,7 @@ describe('[GET] /logout', () => {
     //* Simulates the user request
     const result = await request
       .get('/logout')
-      .set('Cookie', [`auth-token=${global.randomString(60)}`])
+      .set('Cookie', [`auth-token=${global.randomSecret(60)}`])
 
     //* Throws if an error occured
     if (result.err) throw result.err
