@@ -97,6 +97,10 @@ describe('[GET] /tools', () => {
       .get('/tools')
       .set('Cookie', `auth-token=${signCookie(jwt.sign({ _id: User._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`)
 
+    //* Throws if an error occured
+    if (result.err) throw result.err
+
+    //* Tests the result to proof if it worked properly
     const tools = []
 
     JSON.parse(result.text).forEach((tool) => {
@@ -115,6 +119,10 @@ describe('[GET] /tools', () => {
       .get('/tools?tag=')
       .set('Cookie', `auth-token=${signCookie(jwt.sign({ _id: User._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`)
 
+    //* Throws if an error occured
+    if (result.err) throw result.err
+
+    //* Tests the result to proof if it worked properly
     const tools = []
 
     JSON.parse(result.text).forEach((tool) => {
@@ -133,6 +141,10 @@ describe('[GET] /tools', () => {
       .get('/tools?tag=a')
       .set('Cookie', `auth-token=${signCookie(jwt.sign({ _id: User._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`)
 
+    //* Throws if an error occured
+    if (result.err) throw result.err
+
+    //* Tests the result to proof if it worked properly
     const tools = []
 
     JSON.parse(result.text).forEach((tool) => {
@@ -159,6 +171,10 @@ describe('[GET] /tools', () => {
       .get(`/tools?tag=${tag}`)
       .set('Cookie', `auth-token=${signCookie(jwt.sign({ _id: User._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`)
 
+    //* Throws if an error occured
+    if (result.err) throw result.err
+
+    //* Tests the result to proof if it worked properly
     const tools = []
 
     JSON.parse(result.text).forEach((tool) => {
@@ -187,27 +203,36 @@ describe('[POST] /tools', () => {
   })
 
   test.each(Object.keys(fakeTool))('without a required parameter', async (key) => {
+    //* takes out the fakeTool parameter
     delete fakeTool[key]
+
+    //* Simulates the user request
     const result = await request
       .post('/tools')
       .set('Cookie', `auth-token=${signCookie(jwt.sign({ _id: User._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`)
       .send(fakeTool)
 
+    //* Throws if an error occured
     if (result.err) throw result.err
 
+    //* Tests the result to proof if it worked properly
     expect(result.status).toBe(400)
     expect(result.text).toEqual(global.joi.Tool.validate(fakeTool).error.message)
   })
 
   test('tool.tags = []', async () => {
     fakeTool.tags = []
+
+    //* Simulates the user request
     const result = await request
       .post('/tools')
       .set('Cookie', `auth-token=${signCookie(jwt.sign({ _id: User._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`)
       .send(fakeTool)
 
+    //* Throws if an error occured
     if (result.err) throw result.err
 
+    //* Tests the result to proof if it worked properly
     const joir = global.joi.Tool.validate(JSON.parse(result.text))
     if (joir.error) throw joir.error
 
@@ -223,13 +248,16 @@ describe('[POST] /tools', () => {
   })
 
   test('valid tool', async () => {
+    //* Simulates the user request
     const result = await request
       .post('/tools')
       .set('Cookie', `auth-token=${signCookie(jwt.sign({ _id: User._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`)
       .send(fakeTool)
 
+    //* Throws if an error occured
     if (result.err) throw result.err
 
+    //* Tests the result to proof if it worked properly
     const joir = global.joi.Tool.validate(JSON.parse(result.text))
     if (joir.error) throw joir.error
 
@@ -249,27 +277,42 @@ describe('[DELETE] /tools:id', () => {
   test('valid tool', async () => {
     const tool = await (new Tool(fakeTool).save())
 
+    //* Simulates the user request
     const result = await request
       .delete(`/tools/${tool._id.toString()}`)
       .set('Cookie', `auth-token=${signCookie(jwt.sign({ _id: User._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`)
 
+    //* Throws if an error occured
+    if (result.err) throw result.err
+
+    //* Tests the result to proof if it worked properly
     expect(result.status).toBe(204)
     expect(await Tool.countDocuments({ _id: tool._id })).toBe(0)
   })
 
   test('valid MongoObjectId', async () => {
+    //* Simulates the user request
     const result = await request
       .delete(`/tools/${mongoObjectId()}`)
       .set('Cookie', `auth-token=${signCookie(jwt.sign({ _id: User._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`)
 
+    //* Throws if an error occured
+    if (result.err) throw result.err
+
+    //* Tests the result to proof if it worked properly
     expect(result.status).toBe(204)
   })
 
   test('invalid MongoObjectId', async () => {
+    //* Simulates the user request
     const result = await request
       .delete(`/tools/${global.randomString(32)}`)
       .set('Cookie', `auth-token=${signCookie(jwt.sign({ _id: User._id }, process.env.JWT_SECRET, { expiresIn: '1h' }), process.env.COOKIES_SECRET)}`)
 
+    //* Throws if an error occured
+    if (result.err) throw result.err
+
+    //* Tests the result to proof if it worked properly
     expect(result.status).toBe(400)
     expect(result.text).toBe('The Tool ID is invalid.')
   })
