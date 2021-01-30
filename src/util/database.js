@@ -37,5 +37,5 @@ module.exports.connect = (callback = _callback, DB_NAME = process.env.DB_NAME) =
   }
 
   //* Tries to connect to MongoDB
-  return mongoose.connect(connectionURL, options, module.exports.callback)
+  return mongoose.connect(connectionURL, options, callback)
 }
