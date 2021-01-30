@@ -6,7 +6,7 @@ const { randomUser, signCookie, mongoObjectId } = global.misc
 const router = require('express').Router()
 
 //* Init Database
-global.misc.setupDB(false)
+global.misc.setupDB()
 
 router.get('/', (req, res) => {
   if (req.user) {

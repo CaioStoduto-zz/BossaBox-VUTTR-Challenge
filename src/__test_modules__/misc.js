@@ -26,7 +26,6 @@ async function removeAllCollections () {
 /**
  * Drops all collections from the database
  */
-
 async function dropAllCollections () {
   //* Gets all collections
   const collections = Object.keys(mongoose.connection.collections)

@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken')
 const OAuth = require('../../util/oauth')
 
 //* Init Database
-global.misc.setupDB(false)
+global.misc.setupDB()
 
 //* Testing [GET] /
 describe('[GET] /', () => {
