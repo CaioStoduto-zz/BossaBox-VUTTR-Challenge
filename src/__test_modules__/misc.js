@@ -133,11 +133,64 @@ function mongoObjectId () {
   }).toLowerCase()
 }
 
+//* An extremely simples class to simulate the express.response as easy as possible to inspect results in tests
+class Res {
+  constructor () {
+    this._status = undefined
+    this._message = undefined
+    this._ended = false
+
+    this._cookies = [] // Cookies Jar 🍪🏺 (List of Cookies)
+  }
+
+  // Replica of express.response.cookie()
+  cookie (name, value, options = {}) {
+    const cookie = {}
+
+    //* https://www.npmjs.com/package/cookie
+    cookie.domain = options.domain
+    cookie.encode = options.signed ? (i) => i : (options.encode || encodeURIComponent)
+    cookie.expires = options.expires
+    cookie.httpOnly = options.httpOnly
+    cookie.maxAge = options.maxAge
+    cookie.name = name
+    cookie.path = options.path || '/'
+    cookie.sameSite = options.sameSite
+    cookie.secure = options.secure
+    cookie.value = cookie.encode(options.signed ? signCookie(value, process.env.COOKIES_SECRET) : value)
+
+    this._cookies.push(cookie) // Pushes to the Cookies Jar 🍪🏺
+  }
+
+  // Replica of express.response.end()
+  end () {
+    this._ended = true
+    return this
+  }
+
+  // Replica of express.response.send()
+  send (message) {
+    if (this._message === undefined && this._ended === false) {
+      this._message = message
+      return this
+    } else throw new Error('[ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client')
+  }
+
+  // Replica of express.response.status()
+  status (status) {
+    if (this._ended === false) {
+      if (this._status === undefined) this._status = status
+      return this
+    } else throw new Error('[ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client')
+  }
+}
+
 //* Exporting the functions to able others modules to use it
 module.exports = {
   randomUser,
   setupDB,
   signCookie,
   mongoObjectId,
-  dropAllCollections
+  dropAllCollections,
+  Res
 }

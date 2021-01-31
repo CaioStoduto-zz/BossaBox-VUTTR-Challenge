@@ -65,14 +65,18 @@ async function auth (res, loginID) {
  * @param {String} param0.service service used to authenticate the user
  */
 async function findOrCreateUser ({ identifier, service }) {
+  let error
+
   //* Tries to find the user using the identifier
   let user = await User.findOne({ loginIdentifiers: { [service]: identifier } }).catch((e) => {
     //* If an error occurs, returns the error
-    return {
+    error = {
       status: 500,
-      err_message: e.reason
+      err_message: e
     }
   })
+
+  if (error) return error
 
   //* If the user exists
   if (user) {
