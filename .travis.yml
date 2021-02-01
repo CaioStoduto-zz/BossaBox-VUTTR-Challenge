@@ -11,7 +11,7 @@ jobs:
   include:
     - stage: Test and produce Coverage
       node_js: node
-      script: jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+      script: jest
 
 after_success:
   - java -jar codacy-coverage-reporter-assembly.jar report -l JavaScript -r coverage/lcov.info
