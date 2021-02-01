@@ -104,16 +104,43 @@ PORT=897
 
 ## Tools Used
 
-- [*Travis CI*](https://travis-ci.com/) as [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI) <br/>
-- [*VS Code Insiders*](https://code.visualstudio.com/insiders/) as [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE)
-- [Apiary](https://apiary.io/) as [API Blueprint](https://apiblueprint.org/) Editor
-- [Codacy](https://codacy.com) as Code Grade and [Code Coverage](https://en.wikipedia.org/wiki/Code_coverage) analyser
-- [Talend API Tester](https://chrome.google.com/webstore/detail/talend-api-tester-free-ed/aejoelaoggembcahagimdiliamlcdmfm?hl=en) as API Tester
+- [**Apiary**](https://apiary.io/) as [API Blueprint](https://apiblueprint.org/) Editor
+- [**Codacy**](https://codacy.com) as Code Grade and [Code Coverage](https://en.wikipedia.org/wiki/Code_coverage) analyser
+- [*Travis CI**](https://travis-ci.com/) as [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI) <br/>
+- [**Talend API Tester**](https://chrome.google.com/webstore/detail/talend-api-tester-free-ed/aejoelaoggembcahagimdiliamlcdmfm?hl=en) as API Tester
+- [**VS Code Insiders**](https://code.visualstudio.com/insiders/) as [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE), with the extensions:
+  - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+  - [GitHub Pull Requests and Issues](https://marketplace.visualstudio.com/items?itemName=github.vscode-pull-request-github)
+  - [Jest Snippets](https://marketplace.visualstudio.com/items?itemName=andys8.jest-snippets)
+  - [Jest](https://marketplace.visualstudio.com/items?itemName=orta.vscode-jest)
+  - [markdownlint](https://marketplace.visualstudio.com/items?itemName=davidanson.vscode-markdownlint)
+  - [npm Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense)
+- **Dependencies**
+  - [axios](https://www.npmjs.com/package/axios)
+  - [cookie-parser](https://www.npmjs.com/package/cookie-parser)
+  - [dotenv](https://www.npmjs.com/package/dotenv)
+  - [express](https://www.npmjs.com/package/express)
+  - [express-rate-limit](https://www.npmjs.com/package/express-rate-limit)
+  - [helmet](https://www.npmjs.com/package/helmet)
+  - [joi](https://www.npmjs.com/package/joi)
+  - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+  - [mongoose](https://www.npmjs.com/package/mongoose)
+- **Dev Dependencies**
+  - [{@commitlint/config-conventional, @commitlint/cli}](https://github.com/conventional-changelog/commitlint), [{commitizen, cz-conventional-changelog}](https://github.com/commitizen/cz-cli) and [husky](https://www.npmjs.com/package/husky)
+  - [@commitlint/travis-cli]
+  - [eslint](https://www.npmjs.com/package/eslint) to check syntax, find problems and enforce code style, with the [standard popular guide](https://github.com/standard/standard)
+  - [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest)
+  - [jest](https://www.npmjs.com/package/jest) to test
+  - [nodemon](https://www.npmjs.com/package/nodemon)
+  - [set-cookie-parser](https://www.npmjs.com/package/set-cookie-parser)
+  - [supertest](https://www.npmjs.com/package/supertest)
 
 ## Tests
 
 [![Build Status](https://travis-ci.com/CaioStoduto/BossaBox-VUTTR-Challenge.svg?branch=master)](https://travis-ci.com/CaioStoduto/BossaBox-VUTTR-Challenge)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/0447cdcc7321450ab9d6d386ffe89cd7)](https://www.codacy.com/gh/CaioStoduto/BossaBox-VUTTR-Challenge/dashboard?utm_source=github.com&utm_medium=referral&utm_content=CaioStoduto/BossaBox-VUTTR-Challenge&utm_campaign=Badge_Coverage)
+
+The only missing tests are errors that are difficult to reproduce, but their results are predictable and tested, and OAuths, that cannot be tested aumomatically.
 
 ## License
 
