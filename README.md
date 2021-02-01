@@ -71,11 +71,11 @@ The application will listen to the port `3000`. However you can set to listen to
 
 - **DB_AUTH**<br/>
     A string that contains the database protocol, the username, password and host<br/>
-    `mongodb+srv://\<username\>:\<password\>@cluster0.aaaaa.bbb.mongodb.net`/\<dbname\>
+    `mongodb+srv://<username>:<password>@cluster0.aaaaa.bbb.mongodb.net`/\<dbname\>
 
 - **DB_NAME**<br/>
     The database name<br/>
-    mongodb+srv://\<username\>:\<password\>@cluster0.aaaaa.bbb.mongodb.net/`\<dbname\>`
+    mongodb+srv://\<username\>:\<password\>@cluster0.aaaaa.bbb.mongodb.net/`<dbname>`
 
 - [**GITHUB_PUBLIC**](https://github.com/settings/applications/new)<br/>
     The GitHub OAuth public key<br/>
