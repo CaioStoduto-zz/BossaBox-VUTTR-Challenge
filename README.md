@@ -106,15 +106,15 @@ PORT=897
 
 - [**Apiary**](https://apiary.io/) as [API Blueprint](https://apiblueprint.org/) Editor
 - [**Codacy**](https://codacy.com) as Code Grade and [Code Coverage](https://en.wikipedia.org/wiki/Code_coverage) analyser
-- [*Travis CI**](https://travis-ci.com/) as [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI) <br/>
+- [**Travis CI**](https://travis-ci.com/) as [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI) <br/>
 - [**Talend API Tester**](https://chrome.google.com/webstore/detail/talend-api-tester-free-ed/aejoelaoggembcahagimdiliamlcdmfm?hl=en) as API Tester
 - [**VS Code Insiders**](https://code.visualstudio.com/insiders/) as [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE), with the extensions:
-  - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) is used to check syntax, find problems and enforce code style
+  - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) is used to check syntax, find problems and enforce code style in JavaScript
   - [GitHub Pull Requests and Issues](https://marketplace.visualstudio.com/items?itemName=github.vscode-pull-request-github)
-  - [Jest Snippets](https://marketplace.visualstudio.com/items?itemName=andys8.jest-snippets)
-  - [Jest](https://marketplace.visualstudio.com/items?itemName=orta.vscode-jest)
-  - [markdownlint](https://marketplace.visualstudio.com/items?itemName=davidanson.vscode-markdownlint)
-  - [npm Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense)
+  - [Jest](https://marketplace.visualstudio.com/items?itemName=orta.vscode-jest) is used to automatically execute jest tests and facilitate test debugging
+  - [Jest Snippets](https://marketplace.visualstudio.com/items?itemName=andys8.jest-snippets) adds jest snippets to the VSCode
+  - [markdownlint](https://marketplace.visualstudio.com/items?itemName=davidanson.vscode-markdownlint) is used to check syntax, find problems and enforce code style in Markdown
+  - [npm Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense) autocompletes npm modules in import statements
 - **Dependencies**
   - [axios](https://www.npmjs.com/package/axios) is my favourite promise based HTTP client
   - [cookie-parser](https://www.npmjs.com/package/cookie-parser) is used as a [Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) 🍪 parser that handles signed Cookies 🍪🍪
@@ -127,7 +127,7 @@ PORT=897
   - [mongoose](https://www.npmjs.com/package/mongoose) is a MongoDB object modeling, that is used as a module to access the MongoDB
 - **Dev Dependencies**
   - [{@commitlint/config-conventional, @commitlint/cli}](https://github.com/conventional-changelog/commitlint), [{commitizen, cz-conventional-changelog}](https://github.com/commitizen/cz-cli) and [husky](https://www.npmjs.com/package/husky) are used to enforce a commit style
-  - [@commitlint/travis-cli] is used to implement commitlint to Travis CI
+  - [@commitlint/travis-cli](https://www.npmjs.com/package/@commitlint/travis-cli) is used to implement commitlint to Travis CI
   - [eslint](https://www.npmjs.com/package/eslint) is used to check syntax, find problems and enforce code style, with the [standard popular guide](https://github.com/standard/standard)
   - [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) is a plugin that implements Jest to the ESLint
   - [jest](https://www.npmjs.com/package/jest) is used to make tests
