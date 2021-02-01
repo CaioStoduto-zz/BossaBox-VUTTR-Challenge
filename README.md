@@ -109,38 +109,38 @@ PORT=897
 - [*Travis CI**](https://travis-ci.com/) as [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI) <br/>
 - [**Talend API Tester**](https://chrome.google.com/webstore/detail/talend-api-tester-free-ed/aejoelaoggembcahagimdiliamlcdmfm?hl=en) as API Tester
 - [**VS Code Insiders**](https://code.visualstudio.com/insiders/) as [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE), with the extensions:
-  - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+  - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) is used to check syntax, find problems and enforce code style
   - [GitHub Pull Requests and Issues](https://marketplace.visualstudio.com/items?itemName=github.vscode-pull-request-github)
   - [Jest Snippets](https://marketplace.visualstudio.com/items?itemName=andys8.jest-snippets)
   - [Jest](https://marketplace.visualstudio.com/items?itemName=orta.vscode-jest)
   - [markdownlint](https://marketplace.visualstudio.com/items?itemName=davidanson.vscode-markdownlint)
   - [npm Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense)
 - **Dependencies**
-  - [axios](https://www.npmjs.com/package/axios)
-  - [cookie-parser](https://www.npmjs.com/package/cookie-parser)
-  - [dotenv](https://www.npmjs.com/package/dotenv)
-  - [express](https://www.npmjs.com/package/express)
-  - [express-rate-limit](https://www.npmjs.com/package/express-rate-limit)
-  - [helmet](https://www.npmjs.com/package/helmet)
-  - [joi](https://www.npmjs.com/package/joi)
-  - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-  - [mongoose](https://www.npmjs.com/package/mongoose)
+  - [axios](https://www.npmjs.com/package/axios) is my favourite promise based HTTP client
+  - [cookie-parser](https://www.npmjs.com/package/cookie-parser) is used as a [Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies) 🍪 parser that handles signed Cookies 🍪🍪
+  - [dotenv](https://www.npmjs.com/package/dotenv) is a simple module to load environment variables from a .env file
+  - [express](https://www.npmjs.com/package/express) is my favourite web framework for node
+  - [express-rate-limit](https://www.npmjs.com/package/express-rate-limit) is a simple [rate limiter](https://en.wikipedia.org/wiki/Rate_limiting) to express to prevent [DDOS](https://en.wikipedia.org/wiki/Denial-of-service_attack) and [authentication vulnerabilities](https://owasp.org/www-chapter-singapore/assets/presos/Securing_your_APIs_-_OWASP_API_Top_10_2019,_Real-life_Case.pdf) [(More info)](https://cloud.google.com/solutions/rate-limiting-strategies-techniques)
+  - [helmet](https://www.npmjs.com/package/helmet) is used to protect the server against some web vulnerabilites [(More info)](https://expressjs.com/en/advanced/best-practice-security.html)
+  - [joi](https://www.npmjs.com/package/joi) is used to validate the user [POST] request at /tools
+  - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) is a module that implements Json Web Token [(Learn more about)](https://jwt.io/) that is used in the proccess of the user authentication
+  - [mongoose](https://www.npmjs.com/package/mongoose) is a MongoDB object modeling, that is used as a module to access the MongoDB
 - **Dev Dependencies**
-  - [{@commitlint/config-conventional, @commitlint/cli}](https://github.com/conventional-changelog/commitlint), [{commitizen, cz-conventional-changelog}](https://github.com/commitizen/cz-cli) and [husky](https://www.npmjs.com/package/husky)
-  - [@commitlint/travis-cli]
-  - [eslint](https://www.npmjs.com/package/eslint) to check syntax, find problems and enforce code style, with the [standard popular guide](https://github.com/standard/standard)
-  - [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest)
-  - [jest](https://www.npmjs.com/package/jest) to test
-  - [nodemon](https://www.npmjs.com/package/nodemon)
-  - [set-cookie-parser](https://www.npmjs.com/package/set-cookie-parser)
-  - [supertest](https://www.npmjs.com/package/supertest)
+  - [{@commitlint/config-conventional, @commitlint/cli}](https://github.com/conventional-changelog/commitlint), [{commitizen, cz-conventional-changelog}](https://github.com/commitizen/cz-cli) and [husky](https://www.npmjs.com/package/husky) are used to enforce a commit style
+  - [@commitlint/travis-cli] is used to implement commitlint to Travis CI
+  - [eslint](https://www.npmjs.com/package/eslint) is used to check syntax, find problems and enforce code style, with the [standard popular guide](https://github.com/standard/standard)
+  - [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) is a plugin that implements Jest to the ESLint
+  - [jest](https://www.npmjs.com/package/jest) is used to make tests
+  - [nodemon](https://www.npmjs.com/package/nodemon) is used to facilitate the development, because it restarts the node application when file changes in the directory are detected
+  - [set-cookie-parser](https://www.npmjs.com/package/set-cookie-parser) is a simple module that parsers the Set-Cookie header to an object that is used in tests
+  - [supertest](https://www.npmjs.com/package/supertest) is used to test routes and middlewares
 
 ## Tests
 
 [![Build Status](https://travis-ci.com/CaioStoduto/BossaBox-VUTTR-Challenge.svg?branch=master)](https://travis-ci.com/CaioStoduto/BossaBox-VUTTR-Challenge)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/0447cdcc7321450ab9d6d386ffe89cd7)](https://www.codacy.com/gh/CaioStoduto/BossaBox-VUTTR-Challenge/dashboard?utm_source=github.com&utm_medium=referral&utm_content=CaioStoduto/BossaBox-VUTTR-Challenge&utm_campaign=Badge_Coverage)
 
-The only missing tests are errors that are difficult to reproduce, but their results are predictable and tested, and OAuths, that cannot be tested aumomatically.
+The only missing tests are errors that are difficult to reproduce, but their results are predictable and tested, and OAuths, that cannot be tested automatically.
 
 ## License
 
