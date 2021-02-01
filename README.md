@@ -16,7 +16,7 @@ Your task is to build an API and database for the VUTTR (Very Useful Tools to Re
 - [Documentation](#documentation)
 - [Installation](#installation)
 - [How to Use](#how-to-use)
-- [Tools used](#tools-used)
+- [Tools Used](#tools-used)
 - [Learnings](#learnings)
 - [Tests](#tests)
 - [License](#license)
@@ -48,7 +48,7 @@ npm install
 ### Requirements
 
 - [MongoDB](https://www.mongodb.com/);
-- A GitHub account that to create a [GitHub OAuth application](https://github.com/settings/applications/new)
+- A GitHub account to create a [GitHub OAuth application](https://github.com/settings/applications/new)
 
 ## How to Use
 
@@ -71,11 +71,11 @@ The application will listen to the port `3000`. However you can set to listen to
 
 - **DB_AUTH**<br/>
     A string that contains the database protocol, the username, password and host<br/>
-    **mongodb+srv://\<username\>:\<password\>@cluster0.aaaaa.bbb.mongodb.net**/\<dbname\>
+    ´**mongodb+srv://\<username\>:\<password\>@cluster0.aaaaa.bbb.mongodb.net**´/\<dbname\>
 
 - **DB_NAME**<br/>
     The database name<br/>
-    mongodb+srv://\<username\>:\<password\>@cluster0.aaaaa.bbb.mongodb.net/**\<dbname\>**
+    mongodb+srv://\<username\>:\<password\>@cluster0.aaaaa.bbb.mongodb.net/´**\<dbname\>**´
 
 - [**GITHUB_PUBLIC**](https://github.com/settings/applications/new)<br/>
     The GitHub OAuth public key<br/>
