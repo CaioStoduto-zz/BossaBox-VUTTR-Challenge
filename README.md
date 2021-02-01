@@ -7,3 +7,8 @@ Your task is to build an API and database for the VUTTR (Very Useful Tools to Re
 [![CodeFactor](https://www.codefactor.io/repository/github/caiostoduto/bossabox-vuttr-challenge/badge)](https://www.codefactor.io/repository/github/caiostoduto/bossabox-vuttr-challenge)
 [![Known Vulnerabilities](https://snyk.io/test/github/CaioStoduto/BossaBox-VUTTR-Challenge/badge.svg?targetFile=package.json)](https://snyk.io/test/github/CaioStoduto/BossaBox-VUTTR-Challenge?targetFile=package.json)
 [![Coverage Status](https://coveralls.io/repos/github/CaioStoduto/BossaBox-VUTTR-Challenge/badge.svg?branch=master)](https://coveralls.io/github/CaioStoduto/BossaBox-VUTTR-Challenge?branch=master)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCaioStoduto%2FBossaBox-VUTTR-Challenge.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FCaioStoduto%2FBossaBox-VUTTR-Challenge?ref=badge_shield)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCaioStoduto%2FBossaBox-VUTTR-Challenge.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FCaioStoduto%2FBossaBox-VUTTR-Challenge?ref=badge_large)
