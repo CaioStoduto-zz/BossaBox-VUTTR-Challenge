@@ -54,7 +54,7 @@ npm install
 
 Create in the root the file `.env` containing:
 
-```JavaScript
+```dosini
 COOKIES_SECRET=
 DB_AUTH=
 DB_NAME=
@@ -91,8 +91,8 @@ The application will listen to the port `3000`. However you can set to listen to
 
 ### .env.example
 
-```JavaScript
-COOKIES_SECRET=Vanilla
+```dosini
+COOKIES_SECRET=Gradma´s love
 JWT_SECRET=1234567890
 DB_AUTH=mongodb+srv://user:password@cluster0.abcde.gcp.mongodb.net
 DB_NAME=database
