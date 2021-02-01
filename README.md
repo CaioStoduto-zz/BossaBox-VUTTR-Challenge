@@ -15,7 +15,10 @@ Your task is to build an API and database for the VUTTR (Very Useful Tools to Re
 - [Challenge](#challenge)
 - [Documentation](#documentation)
 - [Installation](#installation)
+  - [Requirements](#requirements)
 - [How to Use](#how-to-use)
+  - [Description (.env)](#Description-(.env))
+  - [Example (.env)](#Example-(.env))
 - [Tools Used](#tools-used)
 - [Learnings](#learnings)
 - [Tests](#tests)
@@ -41,29 +44,23 @@ The function of each route is described in the file [index.apib](./index.apib).
 # yarn
 yarn install
 
-# npm
+# or npm
 npm install
 ```
 
 ### Requirements
 
+- [*Yarn*](https://yarnpkg.com/) or [npm](https://www.npmjs.com/get-npm);
+- [Nodejs](https://nodejs.org/en/);
+- [Git](https://git-scm.com/)
 - [MongoDB](https://www.mongodb.com/);
 - A GitHub account to create a [GitHub OAuth application](https://github.com/settings/applications/new)
 
 ## How to Use
 
-Create in the root the file `.env` containing:
+You need to edit the file .env, above explains what each option does
 
-```dosini
-COOKIES_SECRET=
-DB_AUTH=
-DB_NAME=
-GITHUB_PUBLIC=
-GITHUB_SECRET=
-JWT_SECRET=
-```
-
-The application will listen to the port `3000`. However you can set to listen to another port adding **PORT=**{port} to `.env`.
+### Description (.env)
 
 - **COOKIES_SECRET** [(More info)](https://www.npmjs.com/package/cookie-parser#cookieparsersecret-options)<br/>
     A random string that will encrypt and sign the cookies 🍪<br/>
@@ -89,7 +86,11 @@ The application will listen to the port `3000`. However you can set to listen to
     A random string that will encrypt and sign the JWT ([JSON Web Token](https://jwt.io/))<br/>
     Example: `idk, a random string`<br/>
 
-### .env.example
+- **PORT** [(More info)](https://expressjs.com/en/api.html#app.listen)<br/>
+    "A 16-bit unsigned number, known as the port number" ~ [Wikipedia](https://en.wikipedia.org/wiki/Port_(computer_networking))<br/>
+    Default: 3000
+
+### Example (.env)
 
 ```dosini
 COOKIES_SECRET=Gradma´s love
@@ -100,6 +101,19 @@ GITHUB_PUBLIC=f5234892909e905f5eee
 GITHUB_SECRET=6953076013f8e8a79b601781da3ea84a7f70415c
 PORT=897
 ```
+
+## Tools Used
+
+- [*Travis CI*](https://travis-ci.com/) as [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI) <br/>
+- [*VS Code Insiders*](https://code.visualstudio.com/insiders/) as [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE)
+- [Apiary](https://apiary.io/) as [API Blueprint](https://apiblueprint.org/) Editor
+- [Codacy](https://codacy.com) as Code Grade and [Code Coverage](https://en.wikipedia.org/wiki/Code_coverage) analyser
+- [Talend API Tester](https://chrome.google.com/webstore/detail/talend-api-tester-free-ed/aejoelaoggembcahagimdiliamlcdmfm?hl=en) as API Tester
+
+## Tests
+
+[![Build Status](https://travis-ci.com/CaioStoduto/BossaBox-VUTTR-Challenge.svg?branch=master)](https://travis-ci.com/CaioStoduto/BossaBox-VUTTR-Challenge)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/0447cdcc7321450ab9d6d386ffe89cd7)](https://www.codacy.com/gh/CaioStoduto/BossaBox-VUTTR-Challenge/dashboard?utm_source=github.com&utm_medium=referral&utm_content=CaioStoduto/BossaBox-VUTTR-Challenge&utm_campaign=Badge_Coverage)
 
 ## License
 
