@@ -52,7 +52,7 @@ npm install
 
 ## How to Use
 
-Create in the root the file `.env` containing: <div style="text-align: right"> .env.example </div>
+Create in the root the file `.env` containing:
 
 ```JavaScript
 COOKIES_SECRET=
@@ -88,6 +88,18 @@ The application will listen to the port `3000`. However you can set to listen to
 - **JWT_SECRET** [(More info)](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback)<br/>
     A random string that will encrypt and sign the JWT ([JSON Web Token](https://jwt.io/))<br/>
     Example: `idk, a random string`<br/>
+
+### .env.example
+
+```JavaScript
+COOKIES_SECRET=Vanilla
+JWT_SECRET=1234567890
+DB_AUTH=mongodb+srv://user:password@cluster0.abcde.gcp.mongodb.net
+DB_NAME=database
+GITHUB_PUBLIC=f5234892909e905f5eee
+GITHUB_SECRET=6953076013f8e8a79b601781da3ea84a7f70415c
+PORT=897
+```
 
 ## License
 
