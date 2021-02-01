@@ -88,7 +88,7 @@ You need to edit the file .env, above explains what each option does
 
 - **PORT** [(More info)](https://expressjs.com/en/api.html#app.listen)<br/>
     "A 16-bit unsigned number, known as the port number" ~ [Wikipedia](https://en.wikipedia.org/wiki/Port_(computer_networking))<br/>
-    Default: 3000
+    Default: `3000`
 
 ### Example (.env)
 
