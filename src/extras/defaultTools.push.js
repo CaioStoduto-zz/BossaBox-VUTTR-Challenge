@@ -4,7 +4,7 @@
  */
 
 //* Importing and applying dotenv (a module that loads environment variables from a .env file into process.env)
-require('dotenv').config()
+if (process.env.NODE_ENV !== 'test') require('dotenv').config()
 
 //* Importing dependencies
 const mongoose = require('mongoose')
@@ -14,8 +14,10 @@ const Tool = require('../models/tool')
 //* If an error occurs, it will log in the console
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'))
 
+const connectionURL = `${process.env.DB_AUTH}/${process.env.DB_NAME}${process.env.NODE_ENV !== 'test' ? '' : `-${global.randomString(5)}`}?retryWrites=true`
+
 //* Tries to connect to MongoDB
-mongoose.connect(`${process.env.DB_AUTH}/${process.env.DB_NAME}?retryWrites=true`, {
+mongoose.connect(connectionURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   w: 'majority'
@@ -41,7 +43,8 @@ mongoose.connect(`${process.env.DB_AUTH}/${process.env.DB_NAME}?retryWrites=true
       console.log(`The tool ${tool.title} was created.`)
 
       if (++i === defaultTools.length) {
-        await mongoose.connection.close()
+        if (global.callback) return global.callback()
+        else await mongoose.connection.close()
       }
     })
   }
