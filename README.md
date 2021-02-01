@@ -21,11 +21,11 @@ Your task is to build an API and database for the VUTTR (Very Useful Tools to Re
 - [Tests](#tests)
 - [License](#license)
 
-## [Challenge](https://raw.githubusercontent.com/CaioStoduto/BossaBox-VUTTR-Challenge/master/public/assets/screencapture-app-bossabox-profile-skills-challenges-5e3c53a13e80520008f25397-2021-02-01-09_47_00.png)
+## [Challenge](https://raw.githubusercontent.com/CaioStoduto/BossaBox-VUTTR-Challenge/master/assets/screencapture-app-bossabox-profile-skills-challenges-5e3c53a13e80520008f25397-2021-02-01-09_47_00.png)
 
 Your task is to build an API and database for the VUTTR (Very Useful Tools to Remember) application. The application is a simple repository for managing tools with their names, links, descriptions and tags. Use a Git repository (public, preferably) for versioning and making the code available.
 
-![Challenge image](https://raw.githubusercontent.com/CaioStoduto/BossaBox-VUTTR-Challenge/master/public/assets/screencapture-app-bossabox-profile-skills-challenges-5e3c53a13e80520008f25397-2021-02-01-09_47_00.png)
+![Challenge image](https://raw.githubusercontent.com/CaioStoduto/BossaBox-VUTTR-Challenge/master/assets/screencapture-app-bossabox-profile-skills-challenges-5e3c53a13e80520008f25397-2021-02-01-09_47_00.png)
 
 ## Documentation
 
