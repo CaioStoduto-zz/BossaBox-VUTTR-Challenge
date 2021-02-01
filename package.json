@@ -8,9 +8,11 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+	"build:apib": "node src/extras/apib.build.js",
     "commit": "git-cz",
     "start": "node .",
     "dev": "nodemon src/index.js --dev",
+    "push:defaultTools": "node src/extras/defaultTools.push.js",
     "test": "jest"
   },
   "dependencies": {

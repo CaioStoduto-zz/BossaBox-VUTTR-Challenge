@@ -1,0 +1,276 @@
+FORMAT: 1A
+
+# VUTTR (Very Useful Tools to Remember)
+
+The application is a simple repository for managing tools with their names, links, descriptions and tags.
+
+• Vars used:
+
+ - JWT_SECRET=0123456789
+ - COOKIES_SECRET=0123456789
+ - HOST=127.0.0.1:897
+
+### Index [GET /]
+
+Shows if the user is logged in and the avaliable OAuths
+
++ Request Valid Cookie 🍪 and JWT (OAuth used was GitHub, but it could be any OAuth)
+
+    + Headers
+
+            cookie: auth-token=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE3N2UwYjRhMTAxM2UyMTI2NGRmM2UiLCJpYXQiOjE2MTIxNTIzMzEsImV4cCI6MTYxMjE1NTkzMX0.esufoa2-V5S8CiZOnMkRTvwGTAexzvgrjvqYO-lvRdo.l/Yz938Va3d9eE4YGQ2r0eRicq5h8W++kRzIIgWfqYM
+
++ Response 200 (plain/text)
+
+        Hi, you still logged on! If you want to logout, http://127.0.0.1:897/logout
+
++ Request Invalid Cookie or JWT or without auth-token Cookie 🍪
+
+    + Headers
+        
+            cookie: any
+
+
++ Response 401 (application/json)
+    
+    + Body
+
+            {"GitHub":"https://github.com/login/oauth/authorize?client_id=undefined&redirect_uri=http%3A%2F%2F127.0.0.1%3A897%2FOAuth%2FGitHub"}
+
+
+### Logout [GET /logout]
+
+Clear the auth-token Cookie, logging the user out
+
++ Response 200 (plain/text)
+
+
+    + Headers
+
+            set-cookie: ["auth-token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT"]
+            
+
+    + Body
+
+            Logged out
+
+## OAuth [/oauth/*]
+
+OAuth callbacks
+
++ Request Valid callback and Existing user
+
++ Response 200 (plain/text)
+    
+    + Headers
+    
+            set-cookie: auth-token=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE3N2UwYjRhMTAxM2UyMTI2NGRmM2UiLCJpYXQiOjE2MTIxNTIzMzEsImV4cCI6MTYxMjE1NTkzMX0.esufoa2-V5S8CiZOnMkRTvwGTAexzvgrjvqYO-lvRdo.l/Yz938Va3d9eE4YGQ2r0eRicq5h8W++kRzIIgWfqYM; Max-Age=86400; Path=/; Expires=Sun, 27 Sep 2020 23:33:46 GMT; HttpOnly
+
+    + Body
+    
+            You're logged in.
+
++ Request Valid callback and New user
+
++ Response 201 (plain/text)
+
+    + Headers
+    
+            set-cookie: auth-token=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE3N2UwYjRhMTAxM2UyMTI2NGRmM2UiLCJpYXQiOjE2MTIxNTIzMzEsImV4cCI6MTYxMjE1NTkzMX0.esufoa2-V5S8CiZOnMkRTvwGTAexzvgrjvqYO-lvRdo.l/Yz938Va3d9eE4YGQ2r0eRicq5h8W++kRzIIgWfqYM; Max-Age=86400; Path=/; Expires=Sun, 27 Sep 2020 23:33:46 GMT; HttpOnly
+    
+    + Body
+    
+            You're a new user, wecolme!
+        
++ Request Invalid callback
+
++ Response 201 (plain/text)
+
+        A generic error message related to incorrect oauth code
+
+        Something went wrong, try again later, http://127.0.0.1:897
+
+
+### GitHub [GET /oauth/GitHub//?code={code}]
+
++ Parameters
+    + code: `aNGM7qKEt8PUUImKgZnn` (required, string)
+
++ Response 200
++ Response 201
+
+
+## Tools [/tools]
+
++ Request Invalid Cookie 🍪 or JWT
+
+    + Headers
+    
+            cookie: any
+
++ Response 401 (plain/text)
+
+        You aren't logged in.
+        
+        Please authenticate using: "http://127.0.0.1:897"
+        
+        Warning: the authentication uses cookies 🍪 (auth-token)
+
++ Request Valid Cookie 🍪 and JWT, but the user isn't authorized (server-side)
+
+    + Headers
+    
+            cookie: auth-token=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE3N2UwYjRhMTAxM2UyMTI2NGRmM2UiLCJpYXQiOjE2MTIxNTIzMzEsImV4cCI6MTYxMjE1NTkzMX0.esufoa2-V5S8CiZOnMkRTvwGTAexzvgrjvqYO-lvRdo.l/Yz938Va3d9eE4YGQ2r0eRicq5h8W++kRzIIgWfqYM
+
++ Response 401 (plain/text)
+
+        You're logged in, but you aren't authorized.
+
+### List all tools [GET /]
+
++ Request Valid Cookie 🍪 and JWT
+
+    + Headers
+    
+            cookie: auth-token=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE3N2UwYjRhMTAxM2UyMTI2NGRmM2UiLCJpYXQiOjE2MTIxNTIzMzEsImV4cCI6MTYxMjE1NTkzMX0.esufoa2-V5S8CiZOnMkRTvwGTAexzvgrjvqYO-lvRdo.l/Yz938Va3d9eE4YGQ2r0eRicq5h8W++kRzIIgWfqYM
+
++ Response 200 (application/json)
+
+        [
+          {
+            "tags":[
+              "organization",
+              "planning",
+              "collaboration",
+              "writing",
+              "calendar"
+            ],
+            "title":"Notion",
+            "link":"https://notion.so",
+            "description":"All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized."
+          },
+          {
+            "tags":[
+              "api",
+              "json",
+              "schema",
+              "node",
+              "github",
+              "rest"
+            ],
+            "title":"json-server",
+            "link":"https://github.com/typicode/json-server",
+            "description":"Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges."
+          },
+          {
+            "tags":[
+              "web",
+              "framework",
+              "node",
+              "http2",
+              "https",
+              "localhost"
+            ],
+            "title":"fastify",
+            "link":"https://www.fastify.io/",
+            "description":"Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2."
+          }
+        ]
+
+### Search tools by tag [GET /?tag={tag}]
+
++ Parameters
+    + tag: `node` (string, optional) - Used to search a tool that has this tag.
+
++ Request Valid Cookie 🍪 and JWT
+
+    + Headers
+    
+            cookie: auth-token=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE3N2UwYjRhMTAxM2UyMTI2NGRmM2UiLCJpYXQiOjE2MTIxNTIzMzEsImV4cCI6MTYxMjE1NTkzMX0.esufoa2-V5S8CiZOnMkRTvwGTAexzvgrjvqYO-lvRdo.l/Yz938Va3d9eE4YGQ2r0eRicq5h8W++kRzIIgWfqYM
+
++ Response 200 (application/json)
+
+        [
+          {
+            "tags":[
+              "api",
+              "json",
+              "schema",
+              "node",
+              "github",
+              "rest"
+            ],
+            "title":"json-server",
+            "link":"https://github.com/typicode/json-server",
+            "description":"Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges."
+          },
+          {
+            "tags":[
+              "web",
+              "framework",
+              "node",
+              "http2",
+              "https",
+              "localhost"
+            ],
+            "title":"fastify",
+            "link":"https://www.fastify.io/",
+            "description":"Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2."
+          }
+        ]        
+
+### Create new tool [POST]
+
++ Request Valid Cookie 🍪 and JWT
+
+    + Headers
+    
+            cookie: auth-token=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE3N2UwYjRhMTAxM2UyMTI2NGRmM2UiLCJpYXQiOjE2MTIxNTIzMzEsImV4cCI6MTYxMjE1NTkzMX0.esufoa2-V5S8CiZOnMkRTvwGTAexzvgrjvqYO-lvRdo.l/Yz938Va3d9eE4YGQ2r0eRicq5h8W++kRzIIgWfqYM
+            Content-Type: application/json
+
+    + Body
+    
+            {
+                "tags":[
+                  "organization",
+                  "planning",
+                  "collaboration",
+                  "writing",
+                  "calendar"
+                ],
+                "title":"Notion",
+                "link":"https://notion.so",
+                "description":"All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized."
+            }
+
++ Response 201 (application/json)
+
+        {
+            "tags":[
+                "organization",
+                "planning",
+                "collaboration",
+                "writing",
+                "calendar"
+            ],
+            "_id": "5f6fd8dafb351821e4e5b5f6",
+            "title": "Notion",
+            "link": "https://notion.so",
+            "description": "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized.",
+            "createdAt": "2021-02-01T03:02:06.311Z",
+            "updatedAt": "2021-02-01T03:02:06.311Z",
+            "__v": 0
+        }
+
+### Delete tool by id [DELETE /{toolId}]
+
++ Parameters
+    + toolId: `5f6fd8dafb351821e4e5b5f6` (string, required) - MongoDB ObjectID of the Tool
+
++ Request Valid Cookie 🍪 and JWT
+
+    + Headers
+    
+            cookie: auth-token=s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDE3N2UwYjRhMTAxM2UyMTI2NGRmM2UiLCJpYXQiOjE2MTIxNTIzMzEsImV4cCI6MTYxMjE1NTkzMX0.esufoa2-V5S8CiZOnMkRTvwGTAexzvgrjvqYO-lvRdo.l/Yz938Va3d9eE4YGQ2r0eRicq5h8W++kRzIIgWfqYM
+
++ Response 204

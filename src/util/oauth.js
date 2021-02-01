@@ -4,6 +4,16 @@ const axios = require('axios')
 //* Exporting all OAuth methods to able others modules to use it
 module.exports = {
   GitHub: {
+    template: {
+      parameters: {
+        code: {
+          type: 'string',
+          length: '20',
+          required: true
+        }
+      },
+      format: '/?code={code}'
+    },
     /**
      * Creates the URL used to redirect the user to the OAuth
      * @param {String} host the host used from the request
