@@ -8,7 +8,8 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/0447cdcc7321450ab9d6d386ffe89cd7)](https://www.codacy.com/gh/CaioStoduto/BossaBox-VUTTR-Challenge/dashboard?utm_source=github.com&utm_medium=referral&utm_content=CaioStoduto/BossaBox-VUTTR-Challenge&utm_campaign=Badge_Coverage)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FCaioStoduto%2FBossaBox-VUTTR-Challenge.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FCaioStoduto%2FBossaBox-VUTTR-Challenge?ref=badge_shield)
 
-Your task is to build an API and database for the VUTTR (Very Useful Tools to Remember) application. The application is a simple repository for managing tools with their names, links, descriptions and tags.
+Your task is to build an API and database for the VUTTR (Very Useful Tools to Remember) application. The application is a simple repository for managing tools with their names, links, descriptions and tags.<br/><br/>
+AWS - http://54.233.153.138:3000/
 
 ## Summary
 
