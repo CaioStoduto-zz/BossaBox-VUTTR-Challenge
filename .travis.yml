@@ -3,8 +3,16 @@ cache: yarn
 node_js:
   - 12
 
+before_script:
+  - sudo apt-get install jq
+  - curl -LSs "$(curl -LSs https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({name, browser_download_url} | select(.name | endswith(".jar"))) | .[0].browser_download_url')" -o codacy-coverage-reporter-assembly.jar
+
+
 jobs:
   include:
     - stage: Test and produce Coverage
       node_js: node
       script: jest && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+
+after_success:
+  - java -jar codacy-coverage-reporter-assembly.jar report -l JavaScript -r coverage/lcov.info 
