@@ -63,7 +63,7 @@ JWT_SECRET=
 
 The application will listen to the port `3000`. However you can set to listen to another port adding **PORT=**{port} to `.env`.
 
-- [**COOKIES_SECRET**](https://www.npmjs.com/package/cookie-parser#cookieparsersecret-options)<br/>
+- **COOKIES_SECRET** [(More info)](https://www.npmjs.com/package/cookie-parser#cookieparsersecret-options)<br/>
     A random string that will encrypt and sign the cookies 🍪<br/>
     Example: `Vanilla`
 
@@ -83,7 +83,7 @@ The application will listen to the port `3000`. However you can set to listen to
     The GitHub OAuth secret key<br/>
     Example: `6953076013f8e8a79b601781da3ea84a7f70415c`
 
-- [**JWT_SECRET**](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback)<br/>
+- **JWT_SECRET** [(More info)](https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback)<br/>
     A random string that will encrypt and sign the JWT ([JSON Web Token](https://jwt.io/))<br/>
     Example: `idk, a random string`<br/>
 
