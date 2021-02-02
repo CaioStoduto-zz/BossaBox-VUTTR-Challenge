@@ -1,4 +1,0 @@
-- uses: "finnp/create-file-action@master"
-      env:
-        FILE_NAME: "abacaxi.voador"
-        FILE_DATA: "filecontent"
