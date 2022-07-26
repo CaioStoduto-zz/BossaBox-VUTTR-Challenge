@@ -2399,10 +2399,10 @@ expect@^26.6.2:
     jest-message-util "^26.6.2"
     jest-regex-util "^26.0.0"
 
-express-rate-limit@^5.2.5:
-  version "5.2.6"
-  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-5.2.6.tgz#b454e1be8a252081bda58460e0a25bf43ee0f7b0"
-  integrity sha512-nE96xaxGfxiS5jP3tD3kIW1Jg9yQgX0rXCs3rCkZtmbWHEGyotwaezkLj7bnB41Z0uaOLM8W4AX6qHao4IZ2YA==
+express-rate-limit@^6.4.0:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-6.5.1.tgz#2b4c329f03265f94f19613519b169afbd018e783"
+  integrity sha512-pxO6ioBLd3i8IHL+RmJtL4noYzte5fugoMdaDabtU4hcg53+x0QkTwfPtM7vWD0YUaXQgNj9NRdzmps+CHEHlA==
 
 express@^4.17.1:
   version "4.17.1"
